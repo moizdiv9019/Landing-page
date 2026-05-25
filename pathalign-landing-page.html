@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PathAlign — AI Career Guidance for Students</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b0c0e;
+    --bg2: #111318;
+    --bg3: #181b22;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0efe8;
+    --text2: #8b8f99;
+    --text3: #5a5e6a;
+    --accent: #4ade80;
+    --accent-dim: rgba(74,222,128,0.12);
+    --accent-border: rgba(74,222,128,0.3);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.1);
+    --amber: #fbbf24;
+    --amber-dim: rgba(251,191,36,0.1);
+    --font: 'Sora', sans-serif;
+    --mono: 'DM Mono', monospace;
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+  /* NAV */
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem; border-bottom: 1px solid var(--border); background: rgba(11,12,14,0.95); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--accent); color: #0b0c0e; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 999px; text-decoration: none; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 800px; margin: 0 auto; }
+
+  /* HERO */
+  .hero { padding: 6rem 2rem 4rem; text-align: center; max-width: 720px; margin: 0 auto; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-family: var(--mono); color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-border); padding: 5px 14px; border-radius: 999px; margin-bottom: 2rem; letter-spacing: 0.3px; }
+  .hero h1 { font-size: clamp(30px, 5vw, 50px); font-weight: 600; line-height: 1.15; letter-spacing: -1.5px; color: var(--text); margin-bottom: 1.2rem; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 17px; color: var(--text2); max-width: 500px; margin: 0 auto 1.5rem; line-height: 1.8; }
+  .hero-relatable { font-size: 14px; color: var(--text3); font-family: var(--mono); max-width: 440px; margin: 0 auto 2.5rem; line-height: 1.7; border-left: 2px solid var(--accent-border); padding-left: 14px; text-align: left; }
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .hstat { text-align: center; }
+  .hstat-num { font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; }
+  .hstat-label { font-size: 12px; color: var(--text3); margin-top: 2px; font-family: var(--mono); }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: flex-start; flex-direction: column; align-items: center; }
+  .btn-primary { background: var(--accent); color: #0b0c0e; font-size: 14px; font-weight: 600; padding: 13px 30px; border-radius: 999px; text-decoration: none; transition: opacity 0.2s, transform 0.15s; font-family: var(--font); display: inline-block; }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .btn-secondary { background: transparent; color: var(--text2); font-size: 14px; font-weight: 400; padding: 12px 24px; border-radius: 999px; text-decoration: none; border: 1px solid var(--border2); transition: all 0.2s; font-family: var(--font); }
+  .btn-secondary:hover { color: var(--text); background: var(--bg2); }
+  .proto-note { font-size: 11px; color: var(--text3); font-family: var(--mono); margin-top: 8px; display: flex; align-items: center; gap: 5px; justify-content: center; }
+  .proto-note span { color: var(--amber); }
+
+  /* SOCIAL PROOF STRIP */
+  .proof-strip { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.25rem 2rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; align-items: center; }
+  .ps-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
+  .ps-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); max-width: 800px; margin: 0 auto; }
+
+  /* SECTION LABELS */
+  .section-label { font-size: 11px; font-family: var(--mono); color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-size: clamp(22px, 3vw, 30px); font-weight: 600; letter-spacing: -0.5px; color: var(--text); margin-bottom: 1rem; line-height: 1.3; }
+  .section-sub { font-size: 15px; color: var(--text2); max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem; }
+
+  /* RELATABLE CALLOUT */
+  .callout { background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 2rem; font-size: 14px; color: var(--accent); line-height: 1.7; }
+  .callout strong { font-weight: 500; }
+
+  /* PROBLEM CARDS */
+  .problem-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .pcard { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; transition: border-color 0.2s; }
+  .pcard:hover { border-color: var(--border2); }
+  .pcard-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg3); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
+  .pcard h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .pcard p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+  /* STAT ROW */
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin: 3rem 0; }
+  .stat-cell { background: var(--bg2); padding: 1.5rem; text-align: center; }
+  .stat-cell-num { font-size: 28px; font-weight: 600; letter-spacing: -1px; color: var(--text); }
+  .stat-cell-num span { color: var(--accent); }
+  .stat-cell-label { font-size: 12px; color: var(--text3); margin-top: 4px; font-family: var(--mono); }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .step { background: var(--bg2); display: grid; grid-template-columns: 56px 1fr; gap: 1.25rem; align-items: start; padding: 1.5rem; transition: background 0.2s; }
+  .step:hover { background: var(--bg3); }
+  .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; color: var(--text2); flex-shrink: 0; }
+  .step-content h3 { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .step-tag { display: inline-block; font-size: 11px; font-family: var(--mono); padding: 3px 10px; border-radius: 999px; margin-top: 8px; }
+  .tag-green { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); }
+  .tag-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(167,139,250,0.25); }
+  .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
+
+  /* VS */
+  .vs-wrap { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .vs-header { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 16px; background: var(--bg3); border-bottom: 1px solid var(--border); }
+  .vs-header span { font-size: 12px; font-family: var(--mono); color: var(--text3); }
+  .vs-header .us-head { color: var(--accent); }
+  .vs-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 14px 16px; border-bottom: 1px solid var(--border); align-items: center; }
+  .vs-row:last-child { border-bottom: none; }
+  .vs-row:hover { background: var(--bg3); }
+  .vs-row span { font-size: 13px; color: var(--text2); }
+  .vs-row span:first-child { color: var(--text); font-size: 14px; }
+  .check { color: var(--accent); }
+  .cross { color: var(--text3); }
+  .partial { color: var(--amber); }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .price-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; transition: border-color 0.2s; }
+  .price-card:hover { border-color: var(--border2); }
+  .price-card.featured { border-color: var(--accent-border); }
+  .price-tier { font-size: 12px; font-family: var(--mono); color: var(--text3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .price-tier.accent { color: var(--accent); }
+  .price-amount { font-size: 32px; font-weight: 600; letter-spacing: -1px; color: var(--text); margin-bottom: 4px; }
+  .price-amount sup { font-size: 16px; vertical-align: super; font-weight: 400; }
+  .price-period { font-size: 12px; color: var(--text3); margin-bottom: 1.5rem; }
+  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .price-features li { font-size: 13px; color: var(--text2); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
+  .price-features li::before { content: "→"; color: var(--accent); font-size: 12px; margin-top: 3px; flex-shrink: 0; }
+  .price-features li.muted::before { color: var(--text3); }
+  .price-features li.muted { color: var(--text3); }
+
+  /* TESTIMONIAL STYLE QUOTES */
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 3rem; }
+  .quote-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+  .quote-text { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; font-style: italic; }
+  .quote-author { font-size: 12px; font-family: var(--mono); color: var(--text3); }
+  .quote-author strong { color: var(--text2); font-weight: 500; font-style: normal; }
+
+  /* FORM */
+  .form-section { background: var(--bg2); border: 1px solid var(--accent-border); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 560px; margin: 0 auto; }
+  .form-eyebrow { font-size: 11px; font-family: var(--mono); color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .form-title { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); margin-bottom: 0.5rem; }
+  .form-desc { font-size: 14px; color: var(--text2); margin-bottom: 2rem; line-height: 1.7; }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 12px; font-family: var(--mono); color: var(--text3); margin-bottom: 6px; letter-spacing: 0.3px; }
+  .field input, .field select, .field textarea { width: 100%; background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 11px 14px; font-size: 14px; color: var(--text); font-family: var(--font); outline: none; transition: border-color 0.2s; appearance: none; }
+  .field input::placeholder { color: var(--text3); }
+  .field input:focus, .field select:focus { border-color: rgba(74,222,128,0.5); box-shadow: 0 0 0 3px rgba(74,222,128,0.07); }
+  .field select option { background: #181b22; color: var(--text); }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .submit-btn { width: 100%; background: var(--accent); color: #0b0c0e; border: none; border-radius: 999px; padding: 14px; font-size: 15px; font-weight: 600; font-family: var(--font); cursor: pointer; margin-top: 8px; transition: opacity 0.2s, transform 0.1s; letter-spacing: -0.2px; }
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+  .submitting-btn { opacity: 0.7; }
+  .success-msg { display: none; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 8px; padding: 14px 18px; font-size: 14px; color: var(--accent); margin-top: 14px; line-height: 1.7; }
+  .error-msg { display: none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #f87171; margin-top: 10px; }
+  .waitlist-count { text-align: center; font-size: 12px; color: var(--text3); margin-top: 12px; font-family: var(--mono); }
+
+  /* FOUNDER */
+  .founder-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; display: flex; gap: 1.5rem; align-items: flex-start; }
+  .founder-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--accent-dim); border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+  .founder-name { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .founder-role { font-size: 12px; font-family: var(--mono); color: var(--text3); margin-bottom: 10px; }
+  .founder-bio { font-size: 14px; color: var(--text2); line-height: 1.8; }
+  .award-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip { font-size: 11px; font-family: var(--mono); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--border2); color: var(--text2); display: flex; align-items: center; gap: 5px; }
+  .chip.gold { border-color: rgba(251,191,36,0.3); color: var(--amber); background: var(--amber-dim); }
+  .chip.silver { border-color: rgba(167,139,250,0.3); color: var(--purple); background: var(--purple-dim); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 13px; color: var(--text3); font-family: var(--mono); }
+  footer a { color: var(--text3); text-decoration: none; }
+  footer a:hover { color: var(--text2); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.55s ease both; }
+  .hero-badge { animation-delay: 0s; }
+  .hero h1 { animation-delay: 0.07s; }
+  .hero-sub { animation-delay: 0.12s; }
+  .hero-relatable { animation-delay: 0.17s; }
+  .hero-stats { animation-delay: 0.22s; }
+  .hero-btns { animation-delay: 0.27s; }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    .row2 { grid-template-columns: 1fr; }
+    .founder-card { flex-direction: column; }
+    .vs-row, .vs-header { grid-template-columns: 1.6fr 0.9fr 0.9fr 0.9fr; }
+    .vs-row span, .vs-header span { font-size: 11px; }
+    .proof-strip { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span class="logo-dot"></span>PathAlign</div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#solution">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#founder">About</a>
+  </div>
+  <a href="#waitlist" class="nav-cta">Get early access</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span>&#9679;</span> AI-powered career guidance</div>
+  <h1>You have skills.<br/>You need <em>direction.</em></h1>
+  <p class="hero-sub">PathAlign gives diploma and engineering students a personalized career roadmap — built around your actual skills, not generic advice that fits everyone and helps no one.</p>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num" id="hero-count">--</div>
+      <div class="hstat-label">on waitlist</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">Free</div>
+      <div class="hstat-label">early access</div>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="#waitlist" class="btn-primary">Get early access — free</a>
+    <div class="btn-row">
+      <a href="https://pathalign-ai.streamlit.app/" target="_blank" class="btn-secondary">Try the prototype →</a>
+    </div>
+    <div class="proto-note"><span>&#9888;</span> Prototype may take a moment to wake up — it runs on free hosting. Click "Yes, get this app back up" if prompted.</div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF STRIP -->
+<!-- <div class="proof-strip">
+  <div class="ps-item"><span class="ps-dot"></span> &#127942; 1st place — INGENIOUS 2026 National Competition</div>
+  <div class="ps-item"><span class="ps-dot"></span> &#127944; 3rd place — INNOVYA 2026 National Competition</div>
+  <div class="ps-item"><span class="ps-dot"></span> Selected for FKCCI Manthan Finals</div>
+  <div class="ps-item"><span class="ps-dot"></span> Tested with real students at exhibitions</div>
+</div> -->
+
+<hr class="divider" />
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="section-label">the real problem</div>
+  <h2 class="section-title">Sound familiar?</h2>
+
+  <div class="callout">
+    <strong>You're not alone.</strong> According to the India Graduate Skill Index 2025, only 42.6% of Indian graduates are actually employable — not because they're not smart, but because no one gave them a clear direction.
+  </div>
+
+  <div class="problem-cards">
+    <div class="pcard">
+      <div class="pcard-icon">&#128260;</div>
+      <h3>"I don't know which role to go for"</h3>
+      <p>You have skills but no idea which job role actually fits you, so you end up following what your friends do.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-icon">&#128218;</div>
+      <h3>"I'm doing random courses"</h3>
+      <p>YouTube today, Udemy tomorrow, another free course next week. Lots of watching, zero progress towards a job.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-icon">&#127979;</div>
+      <h3>"My college didn't teach this"</h3>
+      <p>Colleges focus on theory for exams. Companies want practical, day-one-ready candidates. That gap is on you to bridge.</p>
+    </div>
+    <div class="pcard">
+      <div class="pcard-icon">&#128533;</div>
+      <h3>"I feel lost before placements"</h3>
+      <p>Walking into interviews without a clear story about your skills leads to rejection — and then self-doubt.</p>
+    </div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>42.6</span>%</div>
+      <div class="stat-cell-label">graduates employable<br/>(India Grad Skill Index 2025)</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>~50</span>%</div>
+      <div class="stat-cell-label">job-ready at graduation<br/>(Economic Survey India)</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-cell-num"><span>25L+</span></div>
+      <div class="stat-cell-label">engineering + diploma<br/>students per year</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-label">how pathalign works</div>
+  <h2 class="section-title">From confused to<br/>career-ready in 4 steps.</h2>
+  <p class="section-sub">Think of it like having a senior who's already placed — sitting with you, understanding your situation, and building you a plan that actually makes sense.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Tell us about yourself</h3>
+        <p>Enter your branch, current skills, interests, and education. Takes 2 minutes. No resume, no CV needed.</p>
+        <span class="step-tag tag-green">takes 2 minutes</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>AI figures out which roles fit you</h3>
+        <p>Our AI analyses your profile, suggests the top 3 career roles that match you, explains why each fits, and shows exactly where your skill gaps are vs. what companies actually want.</p>
+        <span class="step-tag tag-purple">AI-powered analysis</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Get your personalized roadmap</h3>
+        <p>A clear week-by-week 6-month plan — what to learn, in what order, with hand-picked resources. Download it as a document and keep it forever.</p>
+        <span class="step-tag tag-green">downloadable roadmap</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Daily support to keep you on track</h3>
+        <p>Daily learning tasks, a progress tracker, and a 24/7 AI chatbot that answers your doubts — so you actually finish what you start.</p>
+        <span class="step-tag tag-amber">daily execution support</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- QUOTES -->
+<!-- <section>
+  <div class="section-label">what students say</div>
+  <h2 class="section-title">Real reactions from<br/>the prototype demo.</h2>
+  <p class="section-sub">These are real responses from students who tried the working prototype at college exhibitions and national competitions.</p>
+
+  <div class="quotes">
+    <div class="quote-card">
+      <div class="quote-text">"I never thought about ML Engineer as a career for me — but when I saw the roadmap it generated, it made total sense for my skills."</div>
+      <div class="quote-author"><strong>Engineering student</strong> · Exhibition demo participant</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"Can I get the link to this? I want to use it properly at home. This is exactly what I've been looking for."</div>
+      <div class="quote-author"><strong>Final year diploma student</strong> · Exhibition demo participant</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"I've been doing random YouTube courses for 6 months. This finally told me what to actually focus on."</div>
+      <div class="quote-author"><strong>CSE student</strong> · Prototype early tester</div>
+    </div>
+  </div>
+</section> -->
+
+<hr class="divider" />
+
+<!-- VS -->
+<section>
+  <div class="section-label">why not just use chatgpt?</div>
+  <h2 class="section-title">Others give information.<br/>PathAlign ensures execution.</h2>
+  <p class="section-sub">ChatGPT gives generic advice. Coursera sells courses. Neither of them knows you're a diploma student from a Tier 3 college who needs a clear path — not more content.</p>
+
+  <div class="vs-wrap">
+    <div class="vs-header">
+      <span>Feature</span>
+      <span class="us-head">PathAlign</span>
+      <span>ChatGPT</span>
+      <span>Coursera</span>
+    </div>
+    <div class="vs-row">
+      <span>Built for diploma/engineering students</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="cross">&#10005; No</span>
+      <span class="cross">&#10005; No</span>
+    </div>
+    <div class="vs-row">
+      <span>Personalized career path selection</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="partial">&#126; Partial</span>
+      <span class="cross">&#10005; No</span>
+    </div>
+    <div class="vs-row">
+      <span>Skill gap vs. industry requirements</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="cross">&#10005; No</span>
+      <span class="cross">&#10005; No</span>
+    </div>
+    <div class="vs-row">
+      <span>Week-by-week structured roadmap</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="cross">&#10005; No</span>
+      <span class="partial">&#126; Partial</span>
+    </div>
+    <div class="vs-row">
+      <span>Progress tracking + daily tasks</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="cross">&#10005; No</span>
+      <span class="cross">&#10005; No</span>
+    </div>
+    <div class="vs-row">
+      <span>Priced for Indian students (&#8377;99-199)</span>
+      <span class="check">&#10003; Yes</span>
+      <span class="cross">&#10005; No</span>
+      <span class="cross">&#10005; No</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">pricing</div>
+  <h2 class="section-title">Start free. Upgrade<br/>only when it helps you.</h2>
+  <p class="section-sub">No credit card needed to start. We know you're a student — so we priced this like one.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Free</div>
+      <div class="price-amount">&#8377;0</div>
+      <div class="price-period">no card needed · forever free</div>
+      <ul class="price-features">
+        <li>Top 3 career recommendations</li>
+        <li>Skill gap identification</li>
+        <li>Basic roadmap generation</li>
+        <li>Downloadable roadmap</li>
+        <li class="muted">AI chatbot (Pro only)</li>
+        <li class="muted">Daily tasks (Pro only)</li>
+        <li class="muted">Progress tracking (Pro only)</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="price-tier accent">Pro — 7-day free trial</div>
+      <div class="price-amount"><sup>&#8377;</sup>99<span style="font-size:18px;font-weight:400;color:var(--text2)">–199</span></div>
+      <div class="price-period">per month · cancel anytime</div>
+      <ul class="price-features">
+        <li>Everything in Free</li>
+        <li>24/7 AI chatbot for doubts</li>
+        <li>Daily personalised learning tasks</li>
+        <li>Progress tracking dashboard</li>
+        <li>Interview preparation guidance</li>
+        <li>Priority WhatsApp support</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">College / Institute</div>
+      <div class="price-amount" style="font-size:22px;letter-spacing:-0.5px;">Custom</div>
+      <div class="price-period">per academic year</div>
+      <ul class="price-features">
+        <li>All Pro features for every student</li>
+        <li>Placement cell dashboard</li>
+        <li>Batch progress analytics</li>
+        <li>Dedicated onboarding support</li>
+        <li>Bulk pricing from &#8377;5,000/year</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- WAITLIST FORM -->
+<section id="waitlist" style="padding-top: 4rem;">
+  <div class="form-section">
+    <div class="form-eyebrow">&#9679; early access — free</div>
+    <div class="form-title">Save your spot.</div>
+    <div class="form-desc">We're opening access in batches starting with diploma and CSE students. Drop your details and we'll email you the moment your spot is ready — no spam, ever.</div>
+
+    <div class="field">
+      <label>Your full name *</label>
+      <input type="text" id="f-name" placeholder="e.g. Rahul Patil" />
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>College / institute *</label>
+        <input type="text" id="f-college" placeholder="e.g. GPT Athani" />
+      </div>
+      <div class="field">
+        <label>Branch *</label>
+        <select id="f-branch">
+          <option value="">Select...</option>
+          <option>CSE / IT</option>
+          <option>ECE / EEE</option>
+          <option>Mechanical</option>
+          <option>Civil</option>
+          <option>Other engineering</option>
+          <option>Diploma — Computer Science</option>
+          <option>Diploma — other</option>
+        </select>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Year of study *</label>
+        <select id="f-year">
+          <option value="">Select...</option>
+          <option>1st year</option>
+          <option>2nd year</option>
+          <option>3rd year</option>
+          <option>Final year</option>
+          <option>Recent graduate</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Email address *</label>
+        <input type="email" id="f-email" placeholder="you@example.com" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Biggest career challenge right now *</label>
+      <select id="f-challenge">
+        <option value="">What fits you best?</option>
+        <option>I don't know which career to choose</option>
+        <option>I know the career but don't know how to start</option>
+        <option>Doing random courses without a clear direction</option>
+        <option>Low confidence for placements and interviews</option>
+        <option>Completed degree but still not job-ready</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Current skills (optional)</label>
+      <input type="text" id="f-skills" placeholder="e.g. Python, HTML, MySQL..." />
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">&#128640; Save my spot — it's free</button>
+    <div class="success-msg" id="success-msg"></div>
+    <div class="error-msg" id="error-msg">Something went wrong saving your details. Please try again in a moment.</div>
+    <div class="waitlist-count">&#9679; <span id="wl-count">47</span> students already on the waitlist</div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FOUNDER -->
+<section id="founder" style="padding-bottom: 5rem;">
+  <div class="section-label">who built this</div>
+  <h2 class="section-title">Built from inside<br/>the problem.</h2>
+  <p class="section-sub">PathAlign didn't come from a startup office. It came from a student who watched his classmates — and himself — graduate confused, and decided to do something about it.</p>
+
+  <div class="founder-card">
+    <div class="founder-avatar">M</div>
+    <div>
+      <div class="founder-name">Mohiz Riyaz Shedbale</div>
+      <div class="founder-role">Founder · 2nd-year Diploma in CS, Government Polytechnic Athani</div>
+      <div class="founder-bio">
+        I'm currently in my 2nd year of Diploma in Computer Science. While learning and building projects, I kept seeing my peers — and myself — stuck on the same question: "I have skills, but what do I actually do with them?" No one around us had a clear answer. That's what pushed me to build PathAlign. The working prototype has already been tested at exhibitions and validated at national competitions. I'm mentored by Annappa Kyamangol, HOD at GPT Athani, who has guided the project's direction from the start.
+      </div>
+      <div class="award-chips">
+        <span class="chip gold">&#127942; 1st place — INGENIOUS 2026 (National)</span>
+        <span class="chip silver">&#127944; 3rd place — INNOVYA 2026 (National)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>PathAlign &copy; 2026 &nbsp;&middot;&nbsp; <a href="#">Government Polytechnic Athani</a> &nbsp;&middot;&nbsp; <a href="https://pathalign-ai.streamlit.app/" target="_blank">Try the prototype</a> &nbsp;&middot;&nbsp; No spam, ever.</p>
+</footer>
+
+<script>
+  const SHEET_API = 'https://script.google.com/macros/s/AKfycbyoUGkXKFIXEqIIABa9LksLwJ8shEnrtv3Smom70MhYuPNDJypCjVMmvEF-SvwH4s8G/exec';
+  let isFetching = false;
+
+  /* ── STEP 1: GET — fetch real count and inject into UI ── */
+  function updateCountUI(n) {
+    const display = n > 0 ? n : '--';
+    const heroEl  = document.getElementById('hero-count');
+    const formEl  = document.getElementById('wl-count');
+    if (heroEl) heroEl.textContent = display;
+    if (formEl) formEl.textContent = n > 0 ? n : '...';
+  }
+
+  async function fetchCount() {
+    if (isFetching) return;
+    isFetching = true;
+    try {
+      const res  = await fetch(SHEET_API, { method: 'GET' });
+      const data = await res.json();
+      if (data.result === 'success') updateCountUI(data.totalUsers || 0);
+    } catch(e) {
+      /* silently fail — UI keeps showing last known value */
+    } finally {
+      isFetching = false;
+    }
+  }
+
+  /* ── STEP 2 + 3: POST then re-fetch after 1500ms (once, no loop) ── */
+  async function handleSubmit() {
+    const name      = document.getElementById('f-name').value.trim();
+    const college   = document.getElementById('f-college').value.trim();
+    const branch    = document.getElementById('f-branch').value;
+    const year      = document.getElementById('f-year').value;
+    const email     = document.getElementById('f-email').value.trim();
+    const challenge = document.getElementById('f-challenge').value;
+    const skills    = document.getElementById('f-skills').value.trim();
+
+    const errEl = document.getElementById('error-msg');
+    const sucEl = document.getElementById('success-msg');
+    errEl.style.display = 'none';
+    sucEl.style.display = 'none';
+
+    if (!name || !college || !branch || !year || !email || !challenge) {
+      errEl.textContent = 'Please fill in all required fields before submitting.';
+      errEl.style.display = 'block';
+      return;
+    }
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRe.test(email)) {
+      errEl.textContent = 'Please enter a valid email address.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Saving your spot...';
+
+    const body = new URLSearchParams({
+      'Name': name,
+      'college/institution': college,
+      'Branch': branch,
+      'Year od study': year,
+      'Email': email,
+      'Career challenge': challenge,
+      'current skills': skills
+    });
+
+    try {
+      /* POST — no-cors so response is opaque; we don't read it */
+      await fetch(SHEET_API, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+
+      /* Show success immediately */
+      const firstName = name.split(' ')[0];
+      sucEl.innerHTML = '&#10003; You\'re on the list, <strong>' + firstName + '</strong>! Check your inbox — we\'ll email you when your spot opens. You can also try the prototype now: <a href="https://pathalign-ai.streamlit.app/" target="_blank" style="color:var(--accent)">pathalign-ai.streamlit.app</a>';
+      sucEl.style.display = 'block';
+      btn.textContent = '&#10003; You\'re on the list!';
+
+      ['f-name','f-college','f-email','f-skills'].forEach(id => document.getElementById(id).value = '');
+      ['f-branch','f-year','f-challenge'].forEach(id => document.getElementById(id).value = '');
+
+      /* STEP 3: Wait 1500ms for sheet to commit, then re-fetch count once */
+      setTimeout(fetchCount, 1500);
+
+    } catch(e) {
+      errEl.textContent = 'Something went wrong. Please try again in a moment.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Save my spot — it\'s free';
+    }
+  }
+
+  /* ── Page load: run GET immediately ── */
+  document.addEventListener('DOMContentLoaded', fetchCount);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.activeElement.tagName === 'INPUT') handleSubmit();
+  });
+</script>
+</body>
+</html>
